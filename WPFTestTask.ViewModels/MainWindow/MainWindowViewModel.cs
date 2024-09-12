@@ -1,14 +1,24 @@
-﻿using WPFTestTask.Domain.Settings;
+﻿using System.Windows.Input;
+using WPFTestTask.Domain.Settings;
+using WPFTestTask.ViewModels.Commands;
+using WPFTestTask.ViewModels.Windows;
 
 namespace WPFTestTask.ViewModels.MainWindow
 {
     public class MainWindowViewModel : IMainWindowViewModel
     {
         private readonly IMainWindowMementoWrapper _mainWindowMementoWrapper;
+        private readonly IWindowManager _windowManager;
+        private Command _closeMainWindowCommand;
 
-        public MainWindowViewModel(IMainWindowMementoWrapper mainWindowMementoWrapper)
+        public MainWindowViewModel(
+            IMainWindowMementoWrapper mainWindowMementoWrapper,
+            IWindowManager windowManager)
         {
             _mainWindowMementoWrapper = mainWindowMementoWrapper;
+            _windowManager = windowManager;
+
+            _closeMainWindowCommand = new Command(CloseMainWindow);
         }
 
         public double Left
@@ -42,6 +52,13 @@ namespace WPFTestTask.ViewModels.MainWindow
         }
 
         public string Title => "Test Task";
+
+        public ICommand CloseMainWindowCommand => _closeMainWindowCommand;
+
+        private void CloseMainWindow()
+        {
+            _windowManager.Close(this);
+        }
     }
 }
 

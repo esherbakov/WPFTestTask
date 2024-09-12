@@ -1,5 +1,7 @@
-﻿namespace WPFTestTask.Views.MainWindow;
+﻿using WPFTestTask.ViewModels.Windows;
 
-public interface IMainWindow
+namespace WPFTestTask.Views.MainWindow;
+
+public interface IMainWindow : IWindow
 {
 }
