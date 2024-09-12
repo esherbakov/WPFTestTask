@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using Autofac;
+using WPFTestTask.Infrastructure.Settings;
 using WPFTestTask.Views;
 using WPFTestTask.Views.MainWindow;
 
@@ -15,6 +16,7 @@ public class Bootstrapper : IDisposable
 
         containerBuilder.RegisterModule<RegistrationModule>();
         containerBuilder.RegisterModule<ViewModels.RegistrationModule>();
+        containerBuilder.RegisterModule<Infrastructure.RegistrationModule>();
 
         _container = containerBuilder.Build();
     }
@@ -26,6 +28,8 @@ public class Bootstrapper : IDisposable
 
     public Window Run()
     {
+        InitializeDependencies();
+
         var mainWindow = _container.Resolve<IMainWindow>();
 
         if (mainWindow is not Window window) throw new NotImplementedException();
@@ -33,5 +37,10 @@ public class Bootstrapper : IDisposable
         window.Show();
 
         return window;
+    }
+
+    private void InitializeDependencies()
+    {
+        _container.Resolve<IMainWindowMementoWrapperInitializer>().Initialize();
     }
 }
