@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autofac" Version="8.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\WPFTestTask.ViewModels\WPFTestTask.ViewModels.csproj" />
   </ItemGroup>
 

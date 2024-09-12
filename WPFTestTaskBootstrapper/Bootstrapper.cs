@@ -1,21 +1,37 @@
-﻿
-using System.Windows;
+﻿using System.Windows;
+using Autofac;
+using WPFTestTask.Views;
+using WPFTestTask.Views.MainWindow;
 
-namespace WPFTestTask.Bootstrapper
+namespace WPFTestTask.Bootstrapper;
+
+public class Bootstrapper : IDisposable
 {
-    public class Bootstrapper : IDisposable
+    private readonly IContainer _container;
+
+    public Bootstrapper()
     {
-        public Window Run()
-        {
-            var mainWindow = new MainWindow();
+        var containerBuilder = new ContainerBuilder();
 
-            mainWindow.Show();
+        containerBuilder.RegisterModule<RegistrationModule>();
+        containerBuilder.RegisterModule<ViewModels.RegistrationModule>();
 
-            return mainWindow;
-        }
-        public void Dispose()
-        {
+        _container = containerBuilder.Build();
+    }
 
-        }
+    public void Dispose()
+    {
+        _container.Dispose();
+    }
+
+    public Window Run()
+    {
+        var mainWindow = _container.Resolve<IMainWindow>();
+
+        if (mainWindow is not Window window) throw new NotImplementedException();
+
+        window.Show();
+
+        return window;
     }
 }
