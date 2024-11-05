@@ -1,11 +1,14 @@
-﻿using System.Runtime.Serialization;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace WPFTestTask.Infrastructure.Settings
 {
-    [DataContract]
-    internal class MainWindowMemento : WindowMemento
+    internal class AboutWindowMemento : WindowMemento
     {
-        public MainWindowMemento()
+        public AboutWindowMemento()
         {
             Left = 100;
             Top = 100;
@@ -13,7 +16,5 @@ namespace WPFTestTask.Infrastructure.Settings
             Height = 400;
             IsMaximized = true;
         }
-
     }
 }
-

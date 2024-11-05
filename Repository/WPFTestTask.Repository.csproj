@@ -8,11 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Autofac" Version="8.1.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Repository\WPFTestTask.Repository.csproj" />
-    <ProjectReference Include="..\WPFTestTask.Domain\WPFTestTask.Domain.csproj" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.10" />
   </ItemGroup>
 
 </Project>

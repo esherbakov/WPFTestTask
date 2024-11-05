@@ -1,6 +1,8 @@
 ﻿using Autofac;
+using WPFTestTask.ViewModels.AboutWindow;
 using WPFTestTask.ViewModels.MainWindow;
 using WPFTestTask.ViewModels.Windows;
+using WPFTestTask.Views.AboutWindow;
 using WPFTestTask.Views.Factories;
 using WPFTestTask.Views.MainWindow;
 
@@ -12,7 +14,8 @@ namespace WPFTestTask.Bootstrapper.Factories
 
         private readonly Dictionary<Type, Type> _map = new()
         {
-            {typeof(IMainWindowViewModel), typeof(IMainWindow)}
+            {typeof(IMainWindowViewModel), typeof(IMainWindow)},
+            {typeof(IAboutWindowViewModel), typeof(IAboutWindow) }
         };
 
         public WindowFactory(IComponentContext componentContext)

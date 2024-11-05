@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using WPFTestTask.Domain.Settings;
+using WPFTestTask.Infrastructure.Common;
 using WPFTestTask.Infrastructure.Settings;
 
 namespace WPFTestTask.Infrastructure
@@ -12,7 +13,17 @@ namespace WPFTestTask.Infrastructure
 
             builder.RegisterType<MainWindowMementoWrapper>()
                 .As<IMainWindowMementoWrapper>()
-                .As<IMainWindowMementoWrapperInitializer>()
+                .As<IWindowMementoWrapperInitializer>()
+                .SingleInstance();
+
+            builder.RegisterType<PathService>()
+                .As<IPathService>()
+                .As<IPathServiceInitializer>()
+                .SingleInstance();
+
+            builder.RegisterType<AboutWindowMementoWrapper>()
+                .As<IAboutWindowMementoWrapper>()
+                .As<IWindowMementoWrapperInitializer>()
                 .SingleInstance();
         }
     }

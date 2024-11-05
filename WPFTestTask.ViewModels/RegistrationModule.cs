@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using WPFTestTask.ViewModels.AboutWindow;
 using WPFTestTask.ViewModels.MainWindow;
 
 namespace WPFTestTask.ViewModels
@@ -10,6 +11,7 @@ namespace WPFTestTask.ViewModels
             base.Load(builder);
 
             builder.RegisterType<MainWindowViewModel>().As<IMainWindowViewModel>().InstancePerDependency();
+            builder.RegisterType<AboutWindowViewModel>().As<IAboutWindowViewModel>().InstancePerDependency();
         }
     }
 }

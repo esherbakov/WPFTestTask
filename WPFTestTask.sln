@@ -6,10 +6,16 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WPFTestTask", "WPFTestTask\WPFTestTask.csproj", "{E2474EB5-019E-46A0-8388-A40AE7E78587}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WPFTestTask.Bootstrapper", "WPFTestTaskBootstrapper\WPFTestTask.Bootstrapper.csproj", "{C83F44A9-8DE9-4DC6-89AC-D27A3C22628F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1C49EFFC-512E-4B0A-85B7-10C36D883E54} = {1C49EFFC-512E-4B0A-85B7-10C36D883E54}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WPFTestTask.Views", "WPFTestTaskViews\WPFTestTask.Views.csproj", "{B0CE48BC-2999-486F-BEF9-2CAFE3536FDE}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WPFTestTask.ViewModels", "WPFTestTask.ViewModels\WPFTestTask.ViewModels.csproj", "{18F5B911-B948-4FD1-A2E6-977E549F7BAA}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1C49EFFC-512E-4B0A-85B7-10C36D883E54} = {1C49EFFC-512E-4B0A-85B7-10C36D883E54}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WPFTestTask.Domain", "WPFTestTask.Domain\WPFTestTask.Domain.csproj", "{05AB87A7-A644-49EF-BA6C-865EFF117378}"
 EndProject
@@ -18,6 +24,11 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Элементы решения", "Элементы решения", "{55CFD9BF-6CC6-41E2-B333-DCEA66F84AE7}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFTestTask.Repository", "Repository\WPFTestTask.Repository.csproj", "{1C49EFFC-512E-4B0A-85B7-10C36D883E54}"
+	ProjectSection(ProjectDependencies) = postProject
+		{05AB87A7-A644-49EF-BA6C-865EFF117378} = {05AB87A7-A644-49EF-BA6C-865EFF117378}
 	EndProjectSection
 EndProject
 Global
@@ -50,6 +61,10 @@ Global
 		{B97B504A-77CE-4020-A77B-27962C748A8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B97B504A-77CE-4020-A77B-27962C748A8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B97B504A-77CE-4020-A77B-27962C748A8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C49EFFC-512E-4B0A-85B7-10C36D883E54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C49EFFC-512E-4B0A-85B7-10C36D883E54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C49EFFC-512E-4B0A-85B7-10C36D883E54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C49EFFC-512E-4B0A-85B7-10C36D883E54}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

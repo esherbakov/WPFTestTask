@@ -1,64 +1,92 @@
 ﻿using System.Windows.Input;
 using WPFTestTask.Domain.Settings;
+using WPFTestTask.ViewModels.AboutWindow;
 using WPFTestTask.ViewModels.Commands;
 using WPFTestTask.ViewModels.Windows;
+using WPFTestTask.Repository;
+using WPFTestTask.Repository.TestData;
 
-namespace WPFTestTask.ViewModels.MainWindow
+namespace WPFTestTask.ViewModels.MainWindow;
+
+public class MainWindowViewModel : WindowViewModel<IMainWindowMementoWrapper>, IMainWindowViewModel
 {
-    public class MainWindowViewModel : IMainWindowViewModel
+    private readonly IWindowManager _windowManager;
+    private readonly IAboutWindowViewModel _aboutWindowViewModel;
+    TestEntityRepository _repository = new TestEntityRepository();
+
+    private readonly Command _closeMainWindowCommand;
+    private readonly Command _openAboutWindowCommand;
+    private readonly Command _createCommand;
+    private readonly Command _readCommand;
+    private readonly Command _updateCommand;
+    private readonly Command _deleteCommand;
+
+
+    public MainWindowViewModel(
+        IMainWindowMementoWrapper mainWindowMementoWrapper,
+        IWindowManager windowManager,
+        IAboutWindowViewModel aboutWindowViewModel)
+        : base(mainWindowMementoWrapper)
     {
-        private readonly IMainWindowMementoWrapper _mainWindowMementoWrapper;
-        private readonly IWindowManager _windowManager;
-        private Command _closeMainWindowCommand;
+        _windowManager = windowManager;
+        _aboutWindowViewModel = aboutWindowViewModel;
 
-        public MainWindowViewModel(
-            IMainWindowMementoWrapper mainWindowMementoWrapper,
-            IWindowManager windowManager)
+        _closeMainWindowCommand = new Command(CloseMainWindow);
+        _openAboutWindowCommand = new Command(OpenAboutWindow);
+        _createCommand = new Command(Create);
+        _readCommand = new Command(Read);
+        _updateCommand = new Command(Update);
+        _deleteCommand = new Command(Delete);
+    }
+
+    public string Title => "WPF Test Task";
+
+    private void OpenAboutWindow()
+    {
+        _windowManager.Show(_aboutWindowViewModel);
+    }
+
+    public ICommand CloseMainWindowCommand => _closeMainWindowCommand;
+    public ICommand OpenAboutWindowCommand => _openAboutWindowCommand;
+    public ICommand CreateCommand => _createCommand;
+    public ICommand ReadlCommand => _readCommand;
+    public ICommand UpdatelCommand => _updateCommand;
+    public ICommand DeleteCommand => _deleteCommand;
+
+    private void CloseMainWindow()
+    {
+        _windowManager.Close(this);
+    }
+
+    private void Create()
+    {
+        TestEntity test = new TestEntity { Name = "Тест"};
+        _repository.Create(test);
+    }
+
+    private void Read()
+    {
+        List<TestEntity> entities = _repository.GetAll();
+    }
+
+    private void Update()
+    {
+        TestEntity? test = _repository.GetAll().FirstOrDefault();
+        if (test != null)
         {
-            _mainWindowMementoWrapper = mainWindowMementoWrapper;
-            _windowManager = windowManager;
-
-            _closeMainWindowCommand = new Command(CloseMainWindow);
+            test.Name = "тест2";
+            _repository.Update(test);
         }
+    }
 
-        public double Left
+    private void Delete()
+    {
+        TestEntity? test = _repository.GetAll().FirstOrDefault();
+        if (test != null)
         {
-            get => _mainWindowMementoWrapper.Left;
-            set => _mainWindowMementoWrapper.Left = value;
-        }
-
-        public double Top
-        {
-            get => _mainWindowMementoWrapper.Top;
-            set => _mainWindowMementoWrapper.Top = value;
-        }
-
-        public double Width
-        {
-            get => _mainWindowMementoWrapper.Width;
-            set => _mainWindowMementoWrapper.Width = value;
-        }
-
-        public double Height
-        {
-            get => _mainWindowMementoWrapper.Height;
-            set => _mainWindowMementoWrapper.Height = value;
-        }
-
-        public bool IsMaximized
-        {
-            get => _mainWindowMementoWrapper.IsMaximized;
-            set => _mainWindowMementoWrapper.IsMaximized = value;
-        }
-
-        public string Title => "Test Task";
-
-        public ICommand CloseMainWindowCommand => _closeMainWindowCommand;
-
-        private void CloseMainWindow()
-        {
-            _windowManager.Close(this);
+            _repository.DeleteById(test.Id);
         }
     }
 }
+
 

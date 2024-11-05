@@ -14,10 +14,37 @@
         Width="{Binding Width, Mode=TwoWay}"
         WindowState="{Binding IsMaximized, Mode=TwoWay, Converter={x:Static converters:BoolToWindowsStateConverter.Instance}}"
         d:DataContext="{d:DesignInstance mainWindow:MainWindowViewModel}">
-    <Grid>
-        <Button Content="Close Main Window"
-                Command="{Binding CloseMainWindowCommand}"
+    <StackPanel Orientation="Vertical"
+                VerticalAlignment="Center">
+        <Button Content="Закрыть окно"
                 Width="120"
-                Height="21" />
-    </Grid>
+                Height="21"
+                Margin="10"
+                Command="{Binding CloseMainWindowCommand}"/>
+        <Button Content="О программе"
+                Width="120"
+                Height="21"
+                Margin="10"
+                Command="{Binding OpenAboutWindowCommand}"/>
+        <Button Content="Создать"
+                Width="120"
+                Height="21"
+                Margin="10"
+                Command="{Binding CreateCommand}"/>
+        <Button Content="Прочитать"
+                Width="120"
+                Height="21"
+                Margin="10"
+                Command="{Binding ReadlCommand}"/>
+        <Button Content="Обновить"
+                Width="120"
+                Height="21"
+                Margin="10"
+                Command="{Binding UpdatelCommand}"/>
+        <Button Content="Удалить"
+                Width="120"
+                Height="21"
+                Margin="10"
+                Command="{Binding DeleteCommand}"/>
+    </StackPanel>
 </Window>
